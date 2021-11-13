@@ -1,0 +1,2 @@
+class AdminTag < ApplicationRecord
+end

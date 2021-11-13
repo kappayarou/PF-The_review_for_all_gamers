@@ -1,0 +1,2 @@
+class UserGameTag < ApplicationRecord
+end

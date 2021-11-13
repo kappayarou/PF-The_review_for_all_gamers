@@ -1,0 +1,2 @@
+class AdminGameTag < ApplicationRecord
+end

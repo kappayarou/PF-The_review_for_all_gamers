@@ -17,3 +17,19 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+.admins-sign_up-title {
+  margin-top: 30px;
+}
+
+.admins-sign_up-table td {
+  border: none;
+}
+
+.admins-sign_up-table td:nth-child(even) {
+  width: 55%;
+}
+
+.admins-sign_up_field {
+  width: 100%;
+}

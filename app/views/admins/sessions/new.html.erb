@@ -1,26 +1,45 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <h2 class="admins-sign_up-title">管理者サインイン</h2>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="col-md-7"></div>
   </div>
-<% end %>
 
-<%= render "admins/shared/links" %>
+  <div class="row">
+    <div class="col-md-8">
+
+      <%= form_with model: @admin, url: admin_session_path, local: true  do |f| %>
+        <%= render "admins/shared/error_messages", resource: resource %>
+
+        <table class="table admins-sign_up-table">
+          <tbody>
+
+            <tr>
+              <td><%= f.label :email, "メールアドレス" %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"admins-sign_up_field" %></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td><%= f.label :password, "パスワード" %></td>
+              <td><%= f.password_field :password, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td><%= f.submit "サインイン" %></td>
+              <td><%= link_to "未登録の方", new_admin_registration_path %></td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+

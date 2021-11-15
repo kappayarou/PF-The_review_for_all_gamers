@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admins
 
-  namespace :admins do
-    resources :games
+  namespace :admin do
+    resources :games, only:[:create, :index, :show, :edit, :new, :destroy]
+    resources :admin_tags, only:[:create, :destroy]
   end
 
-  resources :games, only:[:create, :index, :show, :edit, :new]
+  resources :games
   resources :users
 
 

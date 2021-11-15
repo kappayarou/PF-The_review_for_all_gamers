@@ -1,0 +1,64 @@
+<div class="container admin-games-index">
+  <div class="row head">
+    <div class="col-md-3">
+      <h2><b>ゲーム一覧</b></h2>
+    </div>
+    <div class="col-md-3">
+      <%= link_to "新規ゲーム追加", new_admin_game_path, class:"btn btn-primary" %>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <% @games.each do |game| %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= image_tag game.image %>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-12">
+                <%= game.title %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <% admin_game_tags = game.admin_game_tags.limit(3) %>
+                <% user_game_tags = game.user_game_tags.limit(3) %>
+                <% tags = admin_game_tags %>
+                <% user_game_tags.each do |user_game_tag| %>
+                  <% tags.append(admin_game_tag) %>
+                <% end %>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <%= tags.each do |tag| %>
+                        <td><%= tag %></td>
+                      <% end %>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-3"><h6><b>タグ一覧</b></h6></div>
+        <div class="col-md-5">
+          <%= form_with model: @tag, url: admin_admin_tags_path, local: true do |f| %>
+            <%= f.text_field :tag, placeholder: "新規タグ内容入力" %>
+        </div>
+        <div class="col-md-4">
+            <%= f.submit "新規タグ追加" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

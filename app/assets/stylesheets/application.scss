@@ -18,6 +18,11 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+header {
+  border-bottom: solid black 1px;
+  margin-bottom: 30px;
+}
+
 .admins-sign_up-title {
   margin-top: 30px;
 }
@@ -32,4 +37,8 @@
 
 .admins-sign_up_field {
   width: 100%;
+}
+
+.admin-games-index .head {
+  margin-bottom: 10px;
 }

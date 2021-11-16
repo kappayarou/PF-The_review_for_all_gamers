@@ -61,9 +61,14 @@
 
       <div class="row">
         <div class="col-md-12">
-          <% @admin_tags.each do |admin_tag| %>
-            <%= admin_tag + " " %>
-          <% end %>
+          <div class="admin-games-index-tags">
+            <% @admin_tags.each do |admin_tag| %>
+              <%= admin_tag.tag  %><%= "　" %>
+            <% end %>
+            <% @user_tags.each do |user_tag| %>
+              <%= admin_tag.tag  %><%= "　" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

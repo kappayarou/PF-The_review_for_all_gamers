@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"><h2><b>新規ゲーム追加</b></h2></div>
+    <div class="col-md-9"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+      <%= form_with model: @game, url: new_admin_game_path, local: true do |f| %>
+        <table class="table admin-games-new">
+          <tbody>
+            <tr>
+              <td>ゲームタイトル</td>
+              <td><%= f.text_field :title %></td>
+            </tr>
+            <tr>
+              <td>ゲーム概要</td>
+              <td><%= f.text_area :description %></td>
+            </tr>
+            <tr>
+              <td>ゲーム画像</td>
+              <td><%= f.file_field :image %></td>
+            </tr>
+            <tr>
+              <td>ゲームタグ</td>
+              <td>
+                <%= f.collection_check_boxes(:admin_game_tag_ids, AdminTag.all, :id, :tag) do |b| %>
+                    <% choices = b.text + "　" %>
+                    <%= b.check_box %>
+                    <%= b.label {choices} %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>スタッフ評価</td>
+              <td><%= f.number_field :admin_rating %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= f.submit "新規ゲーム登録", class:"btn btn-primary" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+
+    <div class="col-md-3"></div>
+  </div>
+
+</div>

@@ -49,10 +49,36 @@ header {
   padding: 5px;
 }
 
+.admin-games-index-index {
+  margin-bottom: 30px;
+}
+
 .admin-games-new td {
   border: none;
 }
 
 .admin-games-new-choices {
   height: 10px;
+}
+
+.admin-games-new tr td:nth-child(2n+1) {
+  width: 20%;
+}
+
+.admin-games-new-title-field {
+  width: 100%;
+}
+
+.admin-games-new-description-field {
+  height: 200px;
+  width: 100%;
+}
+
+.borderless td {
+  border: none;
+}
+
+.admin-games-show-description {
+  height: 500px;
+  font-size: 25px;
 }

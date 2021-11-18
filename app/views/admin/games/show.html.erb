@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"><h2><%= @game.title %></h2></div>
+    <div class="col-md-4">
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <td>スタッフ評価</td>
+            <td class="admin-game-rating" data-score="<%= @game.admin_rating %>"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <td>
+              スタッフ評価<br>
+              スタッフ名：<%= @game.admin.name %>
+            </td>
+            <td class="admin-game-rating" data-score="<%= @game.admin_rating %>"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag @game.image, width: '360', height: '540' %>
+    </div>
+    <div class="col-md-4 admin-games-show-description"><%= @game.description %></div>
+    <div class="col-md-4"></div>
+  </div>
+
+</div>
+
+<script>
+  $('.admin-game-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

@@ -5,19 +5,19 @@
   </div>
 
   <div class="row">
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
 
-    <div class="col-md-6">
-      <%= form_with model: @game, url: new_admin_game_path, local: true do |f| %>
+    <div class="col-md-10">
+      <%= form_with model: @game, url: admin_games_path, local: true do |f| %>
         <table class="table admin-games-new">
           <tbody>
             <tr>
               <td>ゲームタイトル</td>
-              <td><%= f.text_field :title %></td>
+              <td><%= f.text_field :title, class:"admin-games-new-title-field" %></td>
             </tr>
             <tr>
               <td>ゲーム概要</td>
-              <td><%= f.text_area :description %></td>
+              <td><%= f.text_area :description, class:"admin-games-new-description-field" %></td>
             </tr>
             <tr>
               <td>ゲーム画像</td>
@@ -35,7 +35,9 @@
             </tr>
             <tr>
               <td>スタッフ評価</td>
-              <td><%= f.number_field :admin_rating %></td>
+              <td>
+                <div id="admin_rating_star"></div>
+              </td>
             </tr>
             <tr>
               <td></td>
@@ -46,7 +48,16 @@
       <% end %>
     </div>
 
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
   </div>
+
+  <script>
+    $('#admin_rating_star').raty({
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      starHalf: "<%= asset_path('star-half.png') %>",
+      scoreName: 'game[admin_rating]'
+    });
+  </script>
 
 </div>

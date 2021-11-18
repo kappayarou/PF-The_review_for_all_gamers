@@ -21,7 +21,7 @@ class Admin::GamesController < ApplicationController
     game.admin_id = current_admin.id
     game.save
 
-    params_tags = params[:admin_tag_id]
+    params_tags = params[:admin_game_tag_ids]
     binding.pry
     params_tags.each do |params_tag|
       admin_game_tag = AdminGameTag.new
@@ -32,6 +32,10 @@ class Admin::GamesController < ApplicationController
 
 
     redirect_to admin_game_path(game.id)
+  end
+
+  def show
+    @game = Game.find(params[:id])
   end
 
   private

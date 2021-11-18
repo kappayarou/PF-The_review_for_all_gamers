@@ -12,14 +12,16 @@
   <div class="row">
     <div class="col-md-7">
       <% @games.each do |game| %>
-        <div class="row">
-          <div class="col-md-4">
-            <%= image_tag game.image %>
+        <div class="row admin-games-index-index">
+          <div class="col-md-2">
+            <%= link_to admin_game_path(game.id) do %>
+              <%= image_tag game.image.variant(resize: "100x100") %>
+            <% end %>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-10">
             <div class="row">
               <div class="col-md-12">
-                <%= game.title %>
+                <%= link_to game.title, admin_game_path(game.id) %>
               </div>
             </div>
             <div class="row">

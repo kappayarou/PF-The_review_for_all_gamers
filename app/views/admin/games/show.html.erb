@@ -29,9 +29,44 @@
   <div class="row">
     <div class="col-md-4">
       <%= image_tag @game.image, width: '360', height: '540' %>
+      <div class="row">
+        <div class="col-md-6"><%= link_to "ゲーム削除", admin_game_path(@game.id), method: :delete, class:"btn btn-danger mt-4" %></div>
+        <div class="col-md-6"><%= link_to "ゲーム編集", edit_admin_game_path(@game.id), class:"btn btn-primary mt-4" %></div>
+      </div>
     </div>
-    <div class="col-md-4 admin-games-show-description"><%= @game.description %></div>
-    <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+      <div class="admin-games-show-description"><%= @game.description %></div>
+      <div class="row">
+        <div class="col-md-6"><%= link_to "ポジティブレビュー", admin_reviews_path(review_type: 0, class:"btn btn-primary") %></div>
+        <div class="col-md-6"><%= link_to "ネガティブレビュー", admin_reviews_path(review_type: 1, class:"btn btn-success") %></div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-3"><h6><b>このゲームのタグ</b></h6></div>
+        <div class="col-md-9"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="admin-games-show-tags">
+            <% @admin_game_tags.each do |admin_game_tag| %>
+              <%= admin_game_tag.admin_tag.tag  %><%= "　" %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to "編集", edit_tag_admin_games_path, class:"btn btn-success" %>
+          </div>
+          <div class="admin-games-show-tags">
+            <% @user_game_tags.each do |user_game_tag| %>
+              <%= user_game_tag.user_tag.tag  %><%= "　" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

@@ -1,0 +1,39 @@
+<div class="container admin-users-index">
+  <div class="row">
+    <div class="col-md-3"><h2><b>ユーザー一覧</b></h2></div>
+    <div class="col-md-9"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>ユーザー名</td>
+            <td>ステータス</td>
+            <td>通報回数</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.nickname %></td>
+              <% if user.is_active %>
+                <td class="active"><%= 有効 %></td>
+              <% else %>
+                <td class="inactive"><%= 無効 %></td>
+              <% end %>
+              <td><%= user.report %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+</div>

@@ -28,14 +28,25 @@
               <div class="col-md-12">
                 <% admin_game_tags = game.admin_game_tags.limit(3) %>
                 <% user_game_tags = game.user_game_tags.limit(3) %>
-                <% tags = admin_game_tags %>
-                <% user_game_tags.each do |user_game_tag| %>
-                  <% tags.append(admin_game_tag) %>
+                <% admin_tags = [] %>
+                <% user_tags = [] %>
+                <% admin_game_tags.each do |admin_game_tag| %>
+                  <% admin_tag = admin_game_tag.admin_tag.tag %>
+                  <% admin_tags.append(admin_tag) %>
                 <% end %>
-                <table class="table">
+                <% user_game_tags.each do |user_game_tag| %>
+                  <% user_tag = user_game_tag.user_tag.tag %>
+                  <% user_tags.append(user_tag) %>
+                <% end %>
+                <table class="table borderless">
                   <tbody>
                     <tr>
-                      <%= tags.each do |tag| %>
+                      <% admin_tags.each do |tag| %>
+                        <td><%= tag %></td>
+                      <% end %>
+                    </tr>
+                    <tr>
+                      <% user_tags.each do |tag| %>
                         <td><%= tag %></td>
                       <% end %>
                     </tr>

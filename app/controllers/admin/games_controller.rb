@@ -21,8 +21,7 @@ class Admin::GamesController < ApplicationController
     game.admin_id = current_admin.id
     game.save
 
-    params_tags = params[:admin_game_tag_ids]
-    binding.pry
+    params_tags = params[:game][:admin_game_tag_ids]
     params_tags.each do |params_tag|
       admin_game_tag = AdminGameTag.new
       admin_game_tag.game_id = game.id
@@ -36,6 +35,28 @@ class Admin::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @admin_game_tags = @game.admin_game_tags
+    @user_game_tags = @game.user_game_tags
+  end
+
+  def edit
+    @game = Game.find(params[:id])
+  end
+
+  def update
+    game = Game.find(params[:id])
+    base_rating = game.admin_rating
+    game.update(admin_game_params)
+    if game.admin_rating != base_rating
+      game.admin_id = current_admin.id
+    end
+    redirect_to admin_game_path(game.id)
+  end
+
+  def destroy
+    game = Game.find(params[:id])
+    game.destroy
+    redirect_to admin_games_path
   end
 
   private

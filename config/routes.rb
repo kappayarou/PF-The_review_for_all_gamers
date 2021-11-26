@@ -24,7 +24,12 @@ Rails.application.routes.draw do
   end
 
   resources :games
-  resources :users
+  resources :user, only:[:show, :edit] do
+    collection do
+      get :mypage
+    end
+  end
+  resources :follows, only:[:create, :destroy]
 
 
 end

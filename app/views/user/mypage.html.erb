@@ -24,8 +24,8 @@
     <div class="col-md-4">
       <h4>フォロー一覧</h4>
       <% @follows.each do |follow| %>
-        <% follow_user = User.find(follow).nickname %>
-        <%= link_to follow_user, user_path(follow) %>
+        <% follow_user = User.find(follow.follow).nickname %>
+        <%= link_to follow_user, user_path(follow.follow) %>
       <% end %>
     </div>
   </div>

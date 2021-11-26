@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  def follow_existed(user)
+    Follow.where(follow: user.id).exists?
+  end
+
 end

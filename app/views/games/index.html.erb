@@ -1,0 +1,103 @@
+<div class="container admin-games-index">
+  <div class="row head">
+    <div class="col-md-3">
+      <h2><b>ゲーム一覧</b></h2>
+    </div>
+    <div class="col-md-9"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <%= search_form_for @q, url: games_path do |f| %>
+        <div class="row mb-4">
+          <%= form_with url: games_path, local: true do |game| %>
+          <div class="col-md-2">
+            <%= game.select :choiced, @sort_select, selected: @sort_prompt %>
+          </div>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.search_field :title_cont, class:"user-game_search-field" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "表示" %>
+          </div>
+        </div>
+      <% end %>
+
+      <% @games.each do |game| %>
+        <div class="row admin-games-index-index">
+          <div class="col-md-2">
+            <%= link_to game_path(game.id) do %>
+              <%= image_tag game.image.variant(resize: "100x100") %>
+            <% end %>
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-12">
+                <%= link_to game.title, game_path(game.id) %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <% admin_game_tags = game.admin_game_tags.limit(3) %>
+                <% user_game_tags = game.user_game_tags.limit(3) %>
+                <% admin_tags = [] %>
+                <% user_tags = [] %>
+                <% admin_game_tags.each do |admin_game_tag| %>
+                  <% admin_tag = admin_game_tag.admin_tag.tag %>
+                  <% admin_tags.append(admin_tag) %>
+                <% end %>
+                <% user_game_tags.each do |user_game_tag| %>
+                  <% user_tag = user_game_tag.user_tag.tag %>
+                  <% user_tags.append(user_tag) %>
+                <% end %>
+                <table class="table borderless">
+                  <tbody>
+                    <tr>
+                      <% admin_tags.each do |tag| %>
+                        <td><%= tag %></td>
+                      <% end %>
+                    </tr>
+                    <tr>
+                      <% user_tags.each do |tag| %>
+                        <td><%= tag %></td>
+                      <% end %>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-3"><h6><b>タグ一覧</b></h6></div>
+        <div class="col-md-5">
+          <%= form_with model: @tag, url: user_tags_path, local: true do |f| %>
+            <%= f.text_field :tag, placeholder: "新規タグ内容入力" %>
+        </div>
+        <div class="col-md-4">
+            <%= f.submit "新規タグ追加" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="admin-games-index-tags">
+            <% @admin_tags.each do |admin_tag| %>
+              <%= admin_tag.tag  %><%= "　" %>
+            <% end %>
+            <% @user_tags.each do |user_tag| %>
+              <%= admin_tag.tag  %><%= "　" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

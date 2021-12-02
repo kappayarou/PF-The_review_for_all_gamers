@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
   end
   resources :follows, only:[:create, :destroy]
+  resources :user_tags, only:[:create, :destroy]
 
 
 end

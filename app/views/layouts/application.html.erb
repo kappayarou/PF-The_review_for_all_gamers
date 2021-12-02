@@ -29,6 +29,11 @@
                 <%= link_to "サインアウト", destroy_user_session_path, method: :delete %>
               </li>
 
+            <% elsif admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "サインアウト", destroy_admin_session_path, method: :delete %>
+              </li>
+
             <% else %>
               <li class="nav-item">
                 <%= link_to "ログイン前" %>

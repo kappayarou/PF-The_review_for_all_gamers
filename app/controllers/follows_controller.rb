@@ -3,16 +3,18 @@ class FollowsController < ApplicationController
   def create
     follow = Follow.new
     follow.user_id = current_user.id
-    follow.follow = params[:follow]
+    follow.follow = params[:follow].to_i
+    if follow.follow != follow.user_id
+      follow.save
+    end
     binding.pry
-    follow.save
-    redirect_to mypage_user_index_path
+    redirect_to user_path(follow.follow)
   end
 
   def destroy
     follow = Follow.find_by(follow: params[:id])
     follow.destroy
-    redirect_to mypage_user_index_path
+    redirect_to user_path(follow.follow)
   end
 
 end

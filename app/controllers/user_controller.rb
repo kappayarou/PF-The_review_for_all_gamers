@@ -10,9 +10,46 @@ class UserController < ApplicationController
   end
 
   def show
+    @sort_select = {"評価順" => 0, "新着順" => 1}
     @user = User.find(params[:id])
-    @q = Game.ransack(params[:q])
-    @games = @q.result
+
+    sort_key = 1
+
+    if params[:choiced]
+      sort_key = params[:choiced].to_i
+    end
+
+    @sort_prompt = 0
+
+    @q = Game.joins(ratings: :user).where(id: @user.id).ransack(params[:q])
+
+    if sort_key == 0
+      @games = @q.result(distinct: true).order(rating: :desc).limit(10)
+      @sort_prompt = 0
+    elsif sort_key == 1
+      @games = @q.result(distinct: true).order(created_at: :desc).limit(10)
+      @sort_prompt = 1
+    end
+
+    select_review = 2
+    @review_type = {"ポジティブレビュー": 0, "ネガティブレビュー": 1}
+    @review_prompt = 0
+
+    if params[:select_review]
+      select_review = params[:select_review].to_i
+    end
+
+    @all_reviews = []
+    if select_review == 0
+      @all_reviews = @user.reviews.where(review_type: 0)
+      @review_prompt = 0
+    elsif  select_review == 1
+      @all_reviews = @user.reviews.where(review_type: 1)
+      @review_prompt = 1
+    end
+
+    @follows = @user.follows
+
   end
 
 end

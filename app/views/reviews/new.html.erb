@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12"><h2><b><%= @game.title %>の新規レビュー</b></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10">
+      <%= form_with model: @review, url: reviews_path, local: true do |f| %>
+        <%= f.hidden_field :game_id, value: @game.id %>
+        <table class="table borderless review-table">
+          <tbody>
+            <tr>
+              <td><b>レビュータイプ</b></td>
+              <td><%= f.select :review_type, @review_type %></td>
+            </tr>
+            <tr>
+              <td><b>レビュー内容</b></td>
+              <td><%= f.text_area :review, class:"review_field" %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= f.submit "レビュー投稿", class:"btn btn-primary" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+
+    <div class="col-md-1"></div>
+  </div>
+
+</div>

@@ -48,8 +48,6 @@ class GamesController < ApplicationController
 
     @rating = Rating.new
 
-    binding.pry
-
   end
 
   def rating_create

@@ -6,7 +6,7 @@
         <tbody>
           <tr>
             <td>ユーザー評価</td>
-            <td class="user-game-rating" data-score="<%= @rating_score %>"></td>
+            <td class="user-game-rating" data-score="<%= @rating_score %>"><%= @rating_score %>点　</td>
           </tr>
         </tbody>
       </table>
@@ -72,7 +72,7 @@
       <table class="table borderless">
         <tr>
           <td>
-            <%= link_to "レビューを書く", new_review_path, method: :delete, class:"btn btn-danger mt-4" %>
+            <%= link_to "レビューを書く", new_review_path(game_id: @game.id), class:"btn btn-success mt-4" %>
           </td>
             <td>
              <div id="user_rating_star"></div>

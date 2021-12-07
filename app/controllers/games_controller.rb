@@ -33,6 +33,39 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @admin_game_tags = @game.admin_game_tags
     @user_game_tags = @game.user_game_tags
+
+    ratings = @game.ratings
+    ratings_list = []
+    ratings.each do |rating|
+      ratings_list.append(rating.rating)
+    end
+
+    if ratings_list.length != 0
+      @rating_score = ratings_list.sum / ratings_list.length
+    else
+      @rating_score = 0
+    end
+
+    @rating = Rating.new
+
+    binding.pry
+
+  end
+
+  def rating_create
+    rating = Rating.new(rating_create_params)
+    if rating.game.ratings.where(user_id: current_user.id) != []
+      redirect_to game_path(rating.game_id)
+      binding.pry
+    else
+      rating.save
+      redirect_to game_path(rating.game_id)
+    end
+  end
+
+  private
+  def rating_create_params
+    params.require(:rating).permit(:rating, :game_id, :user_id)
   end
 
 end

@@ -5,8 +5,8 @@
       <table class="table borderless">
         <tbody>
           <tr>
-            <td>スタッフ評価</td>
-            <td class="admin-game-rating" data-score="<%= @game.admin_rating %>"></td>
+            <td>ユーザー評価</td>
+            <td class="user-game-rating" data-score="<%= @rating_score %>"></td>
           </tr>
         </tbody>
       </table>
@@ -29,17 +29,13 @@
   <div class="row">
     <div class="col-md-4">
       <%= image_tag @game.image, width: '360', height: '540' %>
-      <div class="row">
-        <div class="col-md-6"><%= link_to "ゲーム削除", admin_game_path(@game.id), method: :delete, class:"btn btn-danger mt-4" %></div>
-        <div class="col-md-6"><%= link_to "ゲーム編集", edit_admin_game_path(@game.id), class:"btn btn-primary mt-4" %></div>
-      </div>
     </div>
 
     <div class="col-md-4">
       <div class="admin-games-show-description"><%= @game.description %></div>
       <div class="row">
-        <div class="col-md-6"><%= link_to "ポジティブレビュー", admin_reviews_path(review_type: 0, class:"btn btn-primary") %></div>
-        <div class="col-md-6"><%= link_to "ネガティブレビュー", admin_reviews_path(review_type: 1, class:"btn btn-success") %></div>
+        <div class="col-md-6"><%= link_to "ポジティブレビュー", reviews_path(review_type: 0) %></div>
+        <div class="col-md-6"><%= link_to "ネガティブレビュー", reviews_path(review_type: 1) %></div>
       </div>
     </div>
 
@@ -68,11 +64,47 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+    <%= form_with model: @rating, url: rating_create_games_path, local: true do |f| %>
+      <%= f.hidden_field :game_id, value: @game.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <table class="table borderless">
+        <tr>
+          <td>
+            <%= link_to "レビューを書く", new_review_path, method: :delete, class:"btn btn-danger mt-4" %>
+          </td>
+            <td>
+             <div id="user_rating_star"></div>
+            </td>
+            <td><%= f.submit "評価する", class:"btn btn-primary" %></td>
+        </tr>
+      </table>
+    <% end %>
+    </div>
+  </div>
 
 </div>
 
 <script>
+  $('#user_rating_star').raty({
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    scoreName: 'rating[rating]'
+  });
+</script>
+<script>
   $('.admin-game-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
+<script>
+  $('.user-game-rating').raty({
     readOnly: true,
     score: function() {
       return $(this).attr('data-score');

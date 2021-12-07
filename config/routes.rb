@@ -23,7 +23,11 @@ Rails.application.routes.draw do
 
   end
 
-  resources :games
+  resources :games do
+    collection do
+      post :rating_create
+    end
+  end
   resources :user, only:[:show, :edit] do
     collection do
       get :mypage
@@ -31,6 +35,7 @@ Rails.application.routes.draw do
   end
   resources :follows, only:[:create, :destroy]
   resources :user_tags, only:[:create, :destroy]
+  resources :reviews, only:[:index, :create, :new]
 
 
 end

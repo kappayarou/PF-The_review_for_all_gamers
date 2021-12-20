@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <% if params[:review_type] == "0" %>
+      <div class="col-md-12"><h2><%= @game.title %>のポジティブレビュー</h2></div>
+    <% elsif params[:review_type] == "1" %>
+      <div class="col-md-12"><h2><%= @game.title %>のネガティブレビュー</h2></div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <%= search_form_for @q, url: reviews_path do |f| %>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <%= f.select :choiced, @sort_select, selected: @sort_prompt %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "表示" %>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      <% end %>
+      <% @reviews.each do |review| %>
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <h5><%= link_to review.user.nickname, user_path(review.user.id) %></h5>
+          </div>
+          <div class="col-md-2">
+            <% if !review.favorites.where(user_id: current_user.id).exists? %>
+              <h5><%= link_to "♡", favorites_path(review_type: params[:review_type], game_id: review.game_id, review_id: review.id), method: :post %><%= review.favorites.count %></h5>
+            <% else %>
+              <% favorite = review.favorites.find_by(user_id: current_user) %>
+              <h5><%= link_to "♥", favorite_path(favorite.id, user_id: current_user, review_type: params[:review_type], game_id: review.game_id), method: :delete %><%= review.favorites.count %></h5>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <% if current_user.follow_existed(review.user) %>
+              <%= link_to "フォロー解除", follow_path(review.user.id), method: :delete, class:"btn btn-danger" %>
+            <% else %>
+              <%= link_to "フォローする", follows_path(follow: review.user.id), method: :post, class:"btn btn-primary" %>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <%= link_to "通報する", report_reviews_path(review_id: review.id), method: :post, class:"btn btn-danger" %>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-12 review-border">
+            <%= review.review %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

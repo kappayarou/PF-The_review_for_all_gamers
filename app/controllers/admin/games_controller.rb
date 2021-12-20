@@ -5,6 +5,27 @@ class Admin::GamesController < ApplicationController
     @user_tags = UserTag.all
 
     @tag = AdminTag.new
+    
+    @sort_select = {"評価順" => 0, "新着順" => 1}
+
+    sort_key = 1
+
+    if params[:choiced]
+      sort_key = params[:choiced].to_i
+    end
+
+    @sort_prompt = 0
+
+    @q = Game.ransack(params[:q])
+
+    if sort_key == 0
+      @games = @q.result(distinct: true).order(rating: :desc).limit(10)
+      @sort_prompt = 0
+    elsif sort_key == 1
+      @games = @q.result(distinct: true).order(created_at: :desc).limit(10)
+      @sort_prompt = 1
+    end
+    
   end
 
   def new

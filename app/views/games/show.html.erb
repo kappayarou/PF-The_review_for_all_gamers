@@ -34,8 +34,8 @@
     <div class="col-md-4">
       <div class="admin-games-show-description"><%= @game.description %></div>
       <div class="row">
-        <div class="col-md-6"><%= link_to "ポジティブレビュー", reviews_path(review_type: 0) %></div>
-        <div class="col-md-6"><%= link_to "ネガティブレビュー", reviews_path(review_type: 1) %></div>
+        <div class="col-md-6"><%= link_to "ポジティブレビュー", reviews_path(review_type: 0, game_id: @game.id), class:"btn btn-primary game-review_link-button" %></div>
+        <div class="col-md-6"><%= link_to "ネガティブレビュー", reviews_path(review_type: 1, game_id: @game.id), class:"btn btn-success game-review_link-button" %></div>
       </div>
     </div>
 

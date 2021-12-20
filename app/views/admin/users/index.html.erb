@@ -21,11 +21,11 @@
           <% @users.each do |user| %>
             <tr>
               <td><%= user.id %></td>
-              <td><%= user.nickname %></td>
+              <td><%= link_to user.nickname, admin_user_path(user.id) %></td>
               <% if user.is_active %>
-                <td class="active"><%= 有効 %></td>
+                <td class="active"><%= "有効" %></td>
               <% else %>
-                <td class="inactive"><%= 無効 %></td>
+                <td class="inactive"><%= "無効" %></td>
               <% end %>
               <td><%= user.report %></td>
             </tr>

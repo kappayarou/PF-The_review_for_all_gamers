@@ -13,4 +13,8 @@ class User < ApplicationRecord
     Follow.where(follow: user.id).exists?
   end
 
+  def active_for_authentication?
+    super && is_active
+  end
+
 end

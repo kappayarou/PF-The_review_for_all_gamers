@@ -35,7 +35,16 @@ Rails.application.routes.draw do
   end
   resources :follows, only:[:create, :destroy]
   resources :user_tags, only:[:create, :destroy]
-  resources :reviews, only:[:index, :create, :new]
+
+  resources :reviews, only:[:index, :create, :new] do
+    collection do
+      post :report
+    end
+  end
+
+  resources :favorites, only:[:create, :destroy]
+
+  root to: 'homes#top'
 
 
 end

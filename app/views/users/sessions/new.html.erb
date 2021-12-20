@@ -12,6 +12,7 @@
 
       <%= form_with model: @user, url: user_session_path, local: true  do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
+        <p class="devise-alert"><%= alert %></p>
 
         <table class="table admins-sign_up-table">
           <tbody>

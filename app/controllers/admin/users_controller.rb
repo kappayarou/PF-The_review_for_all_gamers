@@ -13,15 +13,20 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    user = Game.find(params[:id])
+    user = User.find(params[:id])
     user.update(admin_user_params)
     redirect_to admin_user_path
   end
 
   def reviews_index
+    @user = User.find(params[:user_id])
+    @reviews = @user.reviews
   end
 
   def review_destroy
+    review = Review.find(params[:review_id])
+    review.destroy
+    redirect_to reviews_index_admin_users_path(user_id: review.user.id)
   end
 
   private

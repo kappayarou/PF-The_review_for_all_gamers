@@ -7,7 +7,6 @@ class FollowsController < ApplicationController
     if follow.follow != follow.user_id
       follow.save
     end
-    binding.pry
     redirect_to user_path(follow.follow)
   end
 

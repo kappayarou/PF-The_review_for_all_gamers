@@ -11,6 +11,22 @@
 
   <div class="row">
     <div class="col-md-7">
+      <%= search_form_for @q, url: games_path do |f| %>
+        <div class="row mb-4">
+          <%= form_with url: games_path, local: true do |game| %>
+          <div class="col-md-2">
+            <%= game.select :choiced, @sort_select, selected: @sort_prompt %>
+          </div>
+          <% end %>
+          <div class="col-md-7">
+            <%= f.search_field :title_cont, class:"user-game_search-field" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "表示" %>
+          </div>
+        </div>
+      <% end %>
+
       <% @games.each do |game| %>
         <div class="row admin-games-index-index">
           <div class="col-md-2">

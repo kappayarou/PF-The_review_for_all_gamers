@@ -1,0 +1,33 @@
+<div class="container">
+  <div class-"row">
+    <div class="col-md-12"><h2><b><%= @user.nickname %>のレビュー一覧</b></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>レビュー内容</td>
+            <td>ゲームタイトル</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td><%= review.id %></td>
+              <td><%= review.review %></td>
+              <td><%= review.game.title %></td>
+              <td><%= link_to "削除", review_destroy_admin_users_path(review_id: review.id), method: :delete, class:"btn btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+</div>

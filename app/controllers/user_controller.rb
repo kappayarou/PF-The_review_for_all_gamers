@@ -4,6 +4,22 @@ class UserController < ApplicationController
     @user = current_user
 
     @follows = @user.follows
+
+    suggests = []
+    @follows.each do |follow|
+      user = User.find(follow.follow)
+      high_ratings = user.ratings.where("rating > 4")
+      high_ratings.each do |rate|
+        suggests.append(rate.game_id)
+      end
+    end
+    @suggest_games = []
+    suggests.each do |suggest|
+      game = Game.find(suggest)
+      @suggest_games.append(game)
+    end
+    binding.pry
+
   end
 
   def edit

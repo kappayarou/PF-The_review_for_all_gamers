@@ -18,7 +18,6 @@ class UserController < ApplicationController
       game = Game.find(suggest)
       @suggest_games.append(game)
     end
-    binding.pry
 
   end
 

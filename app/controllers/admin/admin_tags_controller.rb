@@ -1,5 +1,13 @@
 class Admin::AdminTagsController < ApplicationController
 
+  before_action :admin_judgement
+
+  def admin_judgement
+    if !admin_signed_in?
+      redirect_to root_path
+    end
+  end
+
   def create
     admin_tag = AdminTag.new(admin_tag_params)
     admin_tag.save

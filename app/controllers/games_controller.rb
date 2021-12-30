@@ -7,25 +7,41 @@ class GamesController < ApplicationController
 
     @tag = UserTag.new
 
+    if params[:tag]
+      if params[:tag][:admin_tag]
+        tags = AdminTag.find((params[:tag][:admin_tag]).to_i).admin_game_tags
+        @games = []
+        tags.each do |tag|
+          @games.append(tag.game)
+        end
+      else
+        tags = UserTag.find((params[:tag][:user_tag]).to_i).user_game_tags
+        @games = []
+        tags.each do |tag|
+          @games.append(tag.game)
+        end
+      end
 
-    @sort_select = {"評価順" => 0, "新着順" => 1}
+    else
+      @sort_select = {"評価順" => 0, "新着順" => 1}
 
-    sort_key = 1
+      sort_key = 1
 
-    if params[:choiced]
-      sort_key = params[:choiced].to_i
-    end
+      if params[:choiced]
+        sort_key = params[:choiced].to_i
+      end
 
-    @sort_prompt = 0
-
-    @q = Game.ransack(params[:q])
-
-    if sort_key == 0
-      @games = @q.result(distinct: true).order(rating: :desc).limit(10)
       @sort_prompt = 0
-    elsif sort_key == 1
-      @games = @q.result(distinct: true).order(created_at: :desc).limit(10)
-      @sort_prompt = 1
+
+      @q = Game.ransack(params[:q])
+
+      if sort_key == 0
+        @games = @q.result(distinct: true).order(rating: :desc).limit(10)
+        @sort_prompt = 0
+      elsif sort_key == 1
+        @games = @q.result(distinct: true).order(created_at: :desc).limit(10)
+        @sort_prompt = 1
+      end
     end
   end
 

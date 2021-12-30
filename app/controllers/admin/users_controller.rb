@@ -1,5 +1,13 @@
 class Admin::UsersController < ApplicationController
 
+  before_action :admin_judgement
+
+  def admin_judgement
+    if !admin_signed_in?
+      redirect_to root_path
+    end
+  end
+
   def index
     @users = User.all
   end

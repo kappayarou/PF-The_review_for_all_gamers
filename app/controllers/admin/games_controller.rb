@@ -1,11 +1,20 @@
 class Admin::GamesController < ApplicationController
+
+  before_action :admin_judgement
+
+  def admin_judgement
+    if !admin_signed_in?
+      redirect_to root_path
+    end
+  end
+
   def index
     @games = Game.all
     @admin_tags = AdminTag.all
     @user_tags = UserTag.all
 
     @tag = AdminTag.new
-    
+
     @sort_select = {"評価順" => 0, "新着順" => 1}
 
     sort_key = 1
@@ -25,7 +34,7 @@ class Admin::GamesController < ApplicationController
       @games = @q.result(distinct: true).order(created_at: :desc).limit(10)
       @sort_prompt = 1
     end
-    
+
   end
 
   def new

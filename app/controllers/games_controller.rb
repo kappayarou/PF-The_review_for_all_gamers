@@ -64,13 +64,14 @@ class GamesController < ApplicationController
 
     @rating = Rating.new
 
+    @user_game_tag = UserGameTag.new
+
   end
 
   def rating_create
     rating = Rating.new(rating_create_params)
     if rating.game.ratings.where(user_id: current_user.id) != []
       redirect_to game_path(rating.game_id)
-      binding.pry
     else
       rating.save
       redirect_to game_path(rating.game_id)

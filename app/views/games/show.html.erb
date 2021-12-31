@@ -53,7 +53,7 @@
             <% end %>
           </div>
           <div>
-            <%= link_to "編集", edit_tag_admin_games_path, class:"btn btn-success" %>
+            <%= link_to "編集", new_user_game_tag_path(game_id: @game.id), class:"btn btn-success" %>
           </div>
           <div class="admin-games-show-tags">
             <% @user_game_tags.each do |user_game_tag| %>

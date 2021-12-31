@@ -44,6 +44,8 @@ Rails.application.routes.draw do
 
   resources :favorites, only:[:create, :destroy]
 
+  resources :user_game_tags, only:[:new, :update]
+
   root to: 'homes#top'
 
 

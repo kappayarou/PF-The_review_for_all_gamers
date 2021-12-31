@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12"><h2><b><%= @game.title %>のタグ編集</b></h2></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= form_with model: @game, url: user_game_tag_path(@game.id), local: true do |f| %>
+        <table class="table borderless">
+          <tr>
+            <td>ゲームタイトル</td>
+            <td><%= @game.title %></td>
+          </tr>
+          <tr>
+            <td>タグ</td>
+            <td>
+              <%= f.collection_check_boxes(:user_game_tag_ids, UserTag.all, :id, :tag, include_hidden: false, checked: false) do |b| %>
+                <% choices = b.text + "　" %>
+                <%= b.check_box %>
+                <%= b.label {choices} %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "タグ登録", class:"btn btn-success" %></td>
+          </tr>
+        </table>
+        <%= f.hidden_field :game_id, value: @game.id %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -55,8 +55,3 @@ https://docs.google.com/spreadsheets/d/1vzuyPjdC_8cx8GhF-5pSIEGarWoDjFqQQmy2zbD5
 - フレームワーク：Ruby on Rails
 - JS ライブラリ：jQuery
 - IDE：Cloud9
-
-## 使用素材
-
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名と URL を明記してください。
-- 使用しない場合は、使用素材の項目を README から削除してください。

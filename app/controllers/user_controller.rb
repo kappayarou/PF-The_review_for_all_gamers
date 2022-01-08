@@ -19,6 +19,9 @@ class UserController < ApplicationController
       @suggest_games.append(game)
     end
 
+    base_need_exp = 100
+    need_exp = ((@user.rank - 1) ** 2) * 4 +base_need_exp
+
   end
 
   def edit

@@ -20,7 +20,10 @@ class UserController < ApplicationController
     end
 
     base_need_exp = 100
-    need_exp = ((@user.rank - 1) ** 2) * 4 +base_need_exp
+    base_review_exp = 100
+
+    need_exp = ((@user.rank - 1) ** 2) * 4 + base_need_exp
+    review_exp = base_review_exp - ((@user.reviews.count ** 2) / 25)
 
   end
 

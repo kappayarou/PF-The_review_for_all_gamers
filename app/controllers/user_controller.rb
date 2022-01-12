@@ -19,11 +19,15 @@ class UserController < ApplicationController
       @suggest_games.append(game)
     end
 
-    base_need_exp = 100
-    base_review_exp = 100
+    reviews = @user.reviews
+    favorites_count = []
+    reviews.each do |review|
+      favorites_count.append(review.favorites.count)
+    end
 
-    need_exp = ((@user.rank - 1) ** 2) * 4 + base_need_exp
-    review_exp = base_review_exp - ((@user.reviews.count ** 2) / 25)
+    need_exp = ((@user.rank - 1) ** 2) * 4 + 100
+    review_exp = 100 - ((@user.reviews.count ** 2) / 25)
+    favorite_ratio_exp = 5000 * (favorites_count.count / reviews.count)
 
   end
 

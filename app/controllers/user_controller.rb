@@ -28,6 +28,7 @@ class UserController < ApplicationController
     need_exp = ((@user.rank - 1) ** 2) * 4 + 100
     review_exp = 100 - ((@user.reviews.count ** 2) / 25)
     favorite_ratio_exp = 5000 * (favorites_count.count / reviews.count)
+    favorite_count_exp = 100 * favorites_count.count
 
   end
 

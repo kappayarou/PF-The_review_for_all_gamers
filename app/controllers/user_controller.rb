@@ -30,7 +30,10 @@ class UserController < ApplicationController
     favorite_ratio_exp = 5000 * (favorites_count.count / reviews.count)
     favorite_count_exp = 100 * favorites_count.count
     rank_point = review_exp + favorite_count_exp + favorite_ratio_exp
+    new_rank = @user.rank
     while need_exp < rank_point do
+      new_rank += 1
+      need_exp = ((new_rank - 1) ** 2) * 4 + 100
     end
 
   end

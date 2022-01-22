@@ -35,6 +35,10 @@ class UserController < ApplicationController
       new_rank += 1
       need_exp = ((new_rank - 1) ** 2) * 4 + 100
     end
+    while need_exp > rank_point do
+      new_rank = new_rank - 1
+      need_exp = ((new_rank - 1) ** 2) * 4 + 100
+    end
 
   end
 

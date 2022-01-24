@@ -10,11 +10,14 @@
       <h4 class="mt-4">プロフィール</h4>
       <h5 class="mt-4">メールアドレス</h5>
       <div class="mypage-profile-field">
-      <%= @user.email%>
+        <%= @user.email%>
       </div>
       <h5 class="mt-2">ニックネーム</h5>
       <div class="mypage-profile-field">
-      <%= @user.nickname %><br>
+        <%= @user.nickname %>
+      </div>
+      <div class="mypage-profile-field">
+        <%= @user.rank %><br>
       </div>
       <%= link_to "プロフィールを編集", edit_user_path(@user.id), class:"btn btn-primary mt-4" %>
     </div>

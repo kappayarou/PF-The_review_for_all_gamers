@@ -32,13 +32,15 @@ class UserController < ApplicationController
     rank_point = review_exp + favorite_count_exp + favorite_ratio_exp
     new_rank = @user.rank
     while need_exp < rank_point do
-      new_rank += 1
+      new_rank = new_rank + 1
       need_exp = ((new_rank - 1) ** 2) * 4 + 100
     end
     while need_exp > rank_point do
       new_rank = new_rank - 1
       need_exp = ((new_rank - 1) ** 2) * 4 + 100
     end
+
+    @user.save
 
   end
 

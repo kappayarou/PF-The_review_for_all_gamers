@@ -18,7 +18,13 @@
       </div>
       <h5 class="mt-2">ユーザーランク</h5>
       <div class="mypage-profile-field">
-        <%= @user.rank %><br>
+        <%= @user.rank %>rank<br>
+      </div>
+      <h5 class="mt-2">ランクポイント内訳</h5>
+      <div class="mypage-profile-field">
+        レビューポイント：<%= @review_exp %>pt<br>
+        いいね数ポイント：<%= @favorite_count_exp %>pt<br>
+        いいね率ポイント：<%= @favorite_ratio_exp %>pt<br>
       </div>
       <%= link_to "プロフィールを編集", edit_user_path(@user.id), class:"btn btn-primary mt-4" %>
     </div>

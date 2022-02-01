@@ -7,4 +7,6 @@ class Game < ApplicationRecord
 
   belongs_to :admin
 
+  validates :title, :description, :image, :admin_rating, presence: true
+
 end

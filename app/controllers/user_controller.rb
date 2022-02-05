@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  #git_test_commit
 
   def mypage
     @user = current_user

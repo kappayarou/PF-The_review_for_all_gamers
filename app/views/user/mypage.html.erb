@@ -26,7 +26,7 @@
         いいね数ポイント：<%= @favorite_count_exp %>pt<br>
         いいね率ポイント：<%= @favorite_ratio_exp %>pt<br>
       </div>
-      <%= link_to "プロフィールを編集", edit_user_path(@user.id), class:"btn btn-primary mt-4" %>
+      <% link_to "プロフィールを編集", edit_user_path(@user.id), class:"btn btn-primary mt-4" %>
     </div>
 
     <div class="col-md-7">

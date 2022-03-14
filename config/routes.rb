@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       post :rating_create
     end
   end
-  resources :user, only:[:show, :edit] do
+  resources :user, only:[:show, :edit, :update] do
     collection do
       get :mypage
     end

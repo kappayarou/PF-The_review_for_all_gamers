@@ -96,4 +96,15 @@ class UserController < ApplicationController
 
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update(user_profile)
+    redirect_to mypage_user_index_path
+  end
+
+  private
+  def user_profile
+    params.require(:user).permit(:email, :nickname)
+  end
+
 end

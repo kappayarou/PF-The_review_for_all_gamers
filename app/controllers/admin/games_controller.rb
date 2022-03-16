@@ -49,24 +49,42 @@ class Admin::GamesController < ApplicationController
   def create
     game = Game.new(admin_game_params)
     game.admin_id = current_admin.id
-    game.save
-
-    params_tags = params[:game][:admin_game_tag_ids]
-    params_tags.each do |params_tag|
-      admin_game_tag = AdminGameTag.new
-      admin_game_tag.game_id = game.id
-      admin_game_tag.admin_tag_id = params_tag
-      admin_game_tag.save
+    if !params[:game][:image] or params[:game][:admin_rating] == "" or params[:game][:admin_game_tag_ids] == [""]
+      redirect_to admin_games_path
+    else
+      if !game.save
+        redirect_to admin_games_path
+      else
+        params_tags = params[:game][:admin_game_tag_ids]
+        params_tags.each do |params_tag|
+          admin_game_tag = AdminGameTag.new
+          admin_game_tag.game_id = game.id
+          admin_game_tag.admin_tag_id = params_tag
+          admin_game_tag.save
+        end
+        redirect_to admin_game_path(game.id)
+      end
     end
 
-
-    redirect_to admin_game_path(game.id)
   end
 
   def show
     @game = Game.find(params[:id])
     @admin_game_tags = @game.admin_game_tags
     @user_game_tags = @game.user_game_tags
+
+    ratings = @game.ratings
+    ratings_list = []
+    ratings.each do |rating|
+      ratings_list.append(rating.rating)
+    end
+
+    if ratings_list.length != 0
+      @rating_score = ratings_list.sum / ratings_list.length
+    else
+      @rating_score = 0
+    end
+
   end
 
   def edit

@@ -70,7 +70,7 @@ class GamesController < ApplicationController
 
   def rating_create
     rating = Rating.new(rating_create_params)
-    if rating.game.ratings.where(user_id: current_user.id) != []
+    if rating.game.ratings.where(user_id: current_user.id) != [] or rating.rating.nil?
       redirect_to game_path(rating.game_id)
     else
       rating.save

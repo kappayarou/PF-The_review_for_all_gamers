@@ -5,8 +5,8 @@
       <table class="table borderless">
         <tbody>
           <tr>
-            <td>スタッフ評価</td>
-            <td class="admin-game-rating" data-score="<%= @game.admin_rating %>"></td>
+            <td>ユーザー評価</td>
+            <td class="user-game-rating" data-score="<%= @rating_score %>"><%= @rating_score %>点　</td>
           </tr>
         </tbody>
       </table>
@@ -73,6 +73,18 @@
 
 <script>
   $('.admin-game-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    // path: '/assets/'
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+  });
+</script>
+<script>
+  $('.user-game-rating').raty({
     readOnly: true,
     score: function() {
       return $(this).attr('data-score');

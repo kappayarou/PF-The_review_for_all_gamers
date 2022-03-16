@@ -14,19 +14,38 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    @game = Game.find(params[:game_id])
+    if params[:q].nil?
+      @game = Game.find(params[:game_id])
+    else
+      @game = Game.find(params[:q][:game_id])
+      review_type = params[:q][:review_type]
+    end
 
     if params[:review_type] == "0"
       @q = @game.reviews.where(review_type: 0).ransack(params[:q])
+      @review_type = 0
     elsif params[:review_type] == "1"
       @q = @game.reviews.where(review_type: 1).ransack(params[:q])
+      @review_type = 1
+    elsif review_type == "0"
+      @q = @game.reviews.where(review_type: 0).ransack(params[:q])
+      @review_type = 0
+    elsif review_type == "1"
+      @q = @game.reviews.where(review_type: 1).ransack(params[:q])
+      @review_type = 1
+    end
+
+    if @review_type == 0
+      @title = "ポジティブレビュー"
+    else
+      @title = "ネガティブレビュー"
     end
 
     @sort_select = {"いいね順" => 0, "新着順" => 1}
     sort_key = 1
 
-    if params[:choiced]
-      sort_key = params[:choiced].to_i
+    if !params[:q].nil?
+      sort_key = params[:q][:choiced].to_i
     end
 
     @sort_prompt = 0

@@ -15,44 +15,45 @@
 
         <table class="table admins-sign_up-table">
           <tbody>
+            <div class="row">
+              <tr>
+                <td><%= f.label :email, "メールアドレス" %></td>
+                <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"admins-sign_up_field" %></td>
+                <td></td>
+              </tr>
 
-            <tr>
-              <td><%= f.label :email, "メールアドレス" %></td>
-              <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"admins-sign_up_field" %></td>
-              <td></td>
-            </tr>
+              <tr>
+                <td><%= f.label :name, "スタッフ名" %></td>
+                <td><%= f.text_field :name, autofocus: true, autocomplete: "name", class:"admins-sign_up_field" %></td>
+                <td></td>
+              </tr>
+            </div>
 
-            <tr>
-              <td><%= f.label :name, "スタッフ名" %></td>
-              <td><%= f.text_field :name, autofocus: true, autocomplete: "name", class:"admins-sign_up_field" %></td>
-              <td></td>
-            </tr>
+              <tr>
+                <td>
+                  <%= f.label :password, "パスワード" %><br>
+                  <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %>文字以上)</em>
+                  <% end %>
+                </td>
+                <td><%= f.password_field :password, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
+                <td></td>
+              </tr>
 
-            <tr>
-              <td>
-                <%= f.label :password, "パスワード" %><br>
-                <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %>文字以上)</em>
-                <% end %>
-              </td>
-              <td><%= f.password_field :password, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
-              <td></td>
-            </tr>
+              <tr>
+                <td>
+                  <%= f.label :password_confirmation, "パスワード" %><br>
+                  （確認用）
+                </td>
+                <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
+                <td></td>
+              </tr>
 
-            <tr>
-              <td>
-                <%= f.label :password_confirmation, "パスワード" %><br>
-                （確認用）
-              </td>
-              <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
-              <td></td>
-            </tr>
-
-            <tr>
-              <td></td>
-              <td><%= f.submit "サインアップ" %></td>
-              <td><%= link_to "登録済みの方", new_admin_session_path %></td>
-            </tr>
+              <tr>
+                <td></td>
+                <td><%= f.submit "サインアップ" %></td>
+                <td><%= link_to "登録済みの方", new_admin_session_path %></td>
+              </tr>
 
 
           </tbody>

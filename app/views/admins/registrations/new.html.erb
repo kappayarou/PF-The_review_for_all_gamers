@@ -13,14 +13,13 @@
       <%= form_with model: @admin, url: admin_registration_path, local: true  do |f| %>
         <%= render "admins/shared/error_messages", resource: resource %>
 
-        <table class="table admins-sign_up-table">
-          <tbody>
-            <div class="row">
-              <tr>
-                <td><%= f.label :email, "メールアドレス" %></td>
-                <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"admins-sign_up_field" %></td>
-                <td></td>
-              </tr>
+          <div class="row">
+            <div class="col-md-4">
+              <%= f.label :email, "メールアドレス" %>
+            </div>
+            <div class="col-md-4">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"admins-sign_up_field" %>
+            </div>
 
               <tr>
                 <td><%= f.label :name, "スタッフ名" %></td>

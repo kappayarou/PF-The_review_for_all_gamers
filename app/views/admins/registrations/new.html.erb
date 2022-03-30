@@ -22,10 +22,10 @@
             </div>
 
             <div class="row">
-                <td><%= f.label :name, "スタッフ名" %></td>
-                <td><%= f.text_field :name, autofocus: true, autocomplete: "name", class:"admins-sign_up_field" %></td>
-                <td></td>
-              </tr>
+              <div class="col-md-6">
+                <%= f.label :name, "スタッフ名" %>
+              </div>
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"admins-sign_up_field" %>
             </div>
 
               <tr>

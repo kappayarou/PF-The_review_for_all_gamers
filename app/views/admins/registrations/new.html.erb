@@ -31,16 +31,11 @@
             </div>
 
           <div class="row">
-              <tr>
-                <td>
                   <%= f.label :password, "パスワード" %><br>
                   <% if @minimum_password_length %>
                     <em>(<%= @minimum_password_length %>文字以上)</em>
                   <% end %>
-                </td>
-                <td><%= f.password_field :password, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
-                <td></td>
-              </tr>
+                <%= f.password_field :password, autocomplete: "new-password", class:"admins-sign_up_field" %>
           </div>
 
               <tr>

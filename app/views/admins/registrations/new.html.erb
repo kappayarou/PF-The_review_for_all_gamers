@@ -43,13 +43,9 @@
           </div>
 
           <div class="row">
-                <td>
                   <%= f.label :password_confirmation, "パスワード" %><br>
                   （確認用）
-                </td>
-                <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class:"admins-sign_up_field" %></td>
-                <td></td>
-              </tr>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"admins-sign_up_field" %>
           </div>
 
               <tr>
